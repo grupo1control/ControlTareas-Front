@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false"
+               class="sidenav"
+               fixedInViewport>
+    <mat-toolbar>Menú</mat-toolbar>
+    <mat-nav-list>
+      <!--<a routerLink="panel" mat-list-item>
+        <mat-icon>account_circle</mat-icon> mi perfil
+      </a>-->
+      <a mat-list-item routerLink="mis-tareas">
+        <mat-icon>sticky_note_2</mat-icon> mis tareas
+      </a>
+      <a mat-list-item routerLink="nueva-tarea">
+        <mat-icon>add_circle_outline</mat-icon> nueva tarea
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        type="button">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>ControlTareas</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

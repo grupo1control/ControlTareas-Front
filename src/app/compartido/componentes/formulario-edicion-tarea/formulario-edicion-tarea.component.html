@@ -1,0 +1,60 @@
+<form (ngSubmit)="guardarTarea($event)" [formGroup]="formulario">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Edición de Tarea</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input formControlName="nombreTarea" matInput placeholder="Nombre de la tarea">
+            <mat-error *ngIf="formulario.controls['nombreTarea'].hasError('required')">
+              El nombre de la tarea es un campo <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea formControlName="descripcionTarea" matInput
+                      placeholder="Descripción de la tarea a realizar"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Seleccione un plazo la tarea</mat-label>
+            <input [matDatepicker]="picker" [min]="fechaMinima" formControlName="nuevoPlazo" matInput readonly>
+            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="formulario.controls['nuevoPlazo'].hasError('required')">
+              El plazo de la tarea es un campo <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label >Estado de la tarea</mat-label>
+            <mat-select formControlName="estadoTarea">
+              <mat-option value="Pendiente">Pendiente</mat-option>
+              <mat-option value="En progreso">En progreso</mat-option>
+              <mat-option value="Realizada">Realizada</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formulario.controls['estadoTarea'].hasError('required')">
+              El estado de la tarea es un campo <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="formulario.invalid" color="primary" mat-raised-button type="submit">
+        <mat-icon>save</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

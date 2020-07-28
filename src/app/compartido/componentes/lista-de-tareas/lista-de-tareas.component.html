@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8">
+  <table aria-label="Elements" class="full-width-table" mat-table matSort>
+
+    <ng-container matColumnDef="nombre">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Nombre</th>
+      <td *matCellDef="let row" mat-cell>{{row.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Descripción</th>
+      <td *matCellDef="let row" mat-cell>{{row.descripcion}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="plazo">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Plazo</th>
+      <td *matCellDef="let row" mat-cell>{{row.plazo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Estado</th>
+      <td *matCellDef="let row" mat-cell>{{row.estado}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Editar / Eliminar</th>
+      <td *matCellDef="let row" mat-cell>
+        <a mat-mini-fab [routerLink]="['../editar-tarea', row.codigo]">
+          <mat-icon>edit</mat-icon>
+        </a> / <button (click)="fuenteDeDatos.eliminarDatos(row.codigo)" color="warn" mat-mini-fab>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="columnasDesplegadas" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columnasDesplegadas;" mat-row></tr>
+  </table>
+
+  <mat-paginator #paginator
+                 [length]="fuenteDeDatos?.datos.length"
+                 [pageIndex]="0"
+                 [pageSizeOptions]="[25, 50, 100, 250]"
+                 [pageSize]="50">
+  </mat-paginator>
+
+</div>
